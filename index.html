@@ -434,6 +434,35 @@
             align-items: center;
             text-align: center;
         }
+
+        /* ********************************************** */
+        /* NUEVO ESTILO PARA LA PÁGINA DE ÉXITO */
+        /* ********************************************** */
+        .success-message {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2ecc71; /* Verde de éxito */
+            text-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+            margin-bottom: 25px;
+        }
+
+        .success-highlight {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #f1c40f, #e67e22); /* Dorado/Naranja para impacto */
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: block;
+            margin: 20px 0;
+            line-height: 1.1;
+        }
+
+        .success-hero .subtitle {
+             max-width: 900px;
+             font-size: 1.25rem;
+             color: #e0e0e0;
+        }
     </style>
 </head>
 <body>
@@ -603,10 +632,12 @@
         <div class="container">
             <h1 id="glitch-text-success" class="text-glitch"></h1>
             <div id="content-to-show-success" class="revealing-content">
-                <p class="subtitle">Para finalizar con el registro de tu patrocinio debes de pagar <span class="highlight">$200 pesos</span> para la edición de fotos de los 9 meses.</p>
-                <p id="first-sponsorship-date" style="font-weight: bold;"></p>
+                <!-- TEXTO MODIFICADO -->
+                <p class="success-message">¡FELICIDADES! ESTÁS DENTRO DEL CREW</p>
+                <p class="success-highlight">RECIBE TU PRIMER PATROCINIO HOY MISMO</p>
+                <p class="subtitle">Tu primer paquete de patrocinio se enviará a partir del <span id="first-sponsorship-date-text" style="color: #ff3838; font-weight: bold;"></span>. Envíanos un mensaje para confirmar tu lugar y coordinar tu primer envío.</p>
                 <!-- El botón ahora tiene atributos de datos para almacenar la info del formulario -->
-                <button id="sendWhatsappBtn" class="btn form-btn" data-form-data="" data-sponsorship-date="">Completar registro por WhatsApp</button>
+                <button id="sendWhatsappBtn" class="btn form-btn" data-form-data="" data-sponsorship-date="">¡Confirmar mi Patrocinio Ahora!</button>
             </div>
         </div>
     </section>
@@ -623,7 +654,8 @@
         const glitchText = document.getElementById('glitch-text');
         const glitchTextSuccess = document.getElementById('glitch-text-success');
         const originalText = "Bienvenidos a Power Labz";
-        const successText = "Bienvenido al club";
+        // TÍTULO DE ÉXITO MODIFICADO
+        const successText = "¡Crew Power Labz!"; 
         const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;':\",./<>?`~";
         let interval = null;
 
@@ -679,6 +711,8 @@
         const patrocinadoSelect = document.getElementById('patrocinado');
         const patrocinioActualSelect = document.getElementById('cuentas-actualmente');
         const patrocinioActualGroup = document.getElementById('patrocinioActual');
+        // ELEMENTO DE TEXTO DE LA FECHA ACTUALIZADO
+        const firstSponsorshipDateText = document.getElementById('first-sponsorship-date-text');
 
         // **********************************************
         // LÓGICA: Lista de números para WhatsApp
@@ -781,7 +815,9 @@
                 sendWhatsappBtn.dataset.sponsorshipDate = firstSponsorshipDate;
                 
                 // Actualizar y mostrar la sección de éxito
-                document.getElementById('first-sponsorship-date').textContent = `Tu primer patrocinio sería el día ${firstSponsorshipDate}.`;
+                // TEXTO DE FECHA ACTUALIZADO
+                firstSponsorshipDateText.textContent = firstSponsorshipDate;
+
                 formSection.style.display = 'none';
                 successHero.style.display = 'block';
                 
@@ -792,7 +828,7 @@
             }
         });
 
-        // Lógica del botón de WhatsApp (MODIFICADA)
+        // Lógica del botón de WhatsApp (MODIFICADA para reflejar el nuevo texto)
         sendWhatsappBtn.addEventListener('click', () => {
             const formData = JSON.parse(sendWhatsappBtn.dataset.formData);
             const sponsorshipDate = sendWhatsappBtn.dataset.sponsorshipDate;
@@ -801,7 +837,8 @@
             const selectedNumber = getRandomWhatsappNumber(); 
             
             // Construye el mensaje con los datos del formulario
-            let whatsappMessage = `¡Hola! Estoy listo para completar mi proceso de patrocinio. Aquí están mis datos:\n`;
+            let whatsappMessage = `¡Hola! ¡Felicidades, estoy dentro del Crew Power Labz! Quiero confirmar mi patrocinio y coordinar mi primer envío lo antes posible.\n\n`;
+            whatsappMessage += `Mis datos de registro:\n`;
             whatsappMessage += `Nombre: ${formData.nombre}\n`;
             whatsappMessage += `Edad: ${formData.edad}\n`;
             whatsappMessage += `Ciudad: ${formData.ciudad}\n`;
@@ -815,8 +852,7 @@
             if (formData.patrocinado === 'Sí') {
                 whatsappMessage += `Patrocinio actual: ${formData.patrocinioActual}\n`;
             }
-            whatsappMessage += `\nMi primer patrocinio sería el día ${sponsorshipDate}.\n`;
-            whatsappMessage += `El pago para la edición de fotos es de $200 pesos. ¿Me proporciona su número de cuenta para pagarle?`;
+            whatsappMessage += `\nFecha de mi primer patrocinio: ${sponsorshipDate}.`;
 
 
             const encodedMessage = encodeURIComponent(whatsappMessage);
