@@ -3,860 +3,751 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrocinio Power Labz</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Registro Power Labz Crew</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Estilos base y tipografía */
-        @import url('https://fonts.cdnfonts.com/css/helvetica-neue-9');
+        /* --- 1. Configuración Global y Reseteo --- */
+        :root {
+            --bg-color: #121212;
+            --primary-green: #00ff88;
+            --dark-green: #00cc66;
+            --text-color: #f0f0f0;
+            --text-muted: #888;
+            --card-bg: #1a1a1a;
+            --input-bg: #222;
+            --border-color: #333;
+            --error-red: #ff6b6b;
+            --gradient: linear-gradient(90deg, var(--primary-green), var(--dark-green));
+        }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Helvetica Neue', sans-serif;
-        }
-        
-        body {
-            background-color: #0a0a0a;
-            color: #e0e0e0;
-            line-height: 1.6;
-            position: relative;
-            overflow-x: hidden;
-            font-weight: 400;
-        }
-        
-        /* Contenedores y secciones */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        header {
-            padding: 30px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .hero {
-            padding: 80px 0 60px;
-            text-align: center;
-            position: relative;
-        }
-        
-        section {
-            padding: 60px 0;
         }
 
-        #benefits-section,
-        #form-section,
-        #success-hero {
-            display: none;
-        }
-        
-        #hero-section {
-            display: block;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        /* Tipografía y colores */
-        h1, h2, h3 {
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            background: linear-gradient(to right, #ffffff, #ff6b6b);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 20px;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
-        }
-        
-        h2 {
-            font-size: 1.8rem;
-            color: #ff3838;
-            letter-spacing: -0.5px;
-        }
-        
-        h3 {
-            font-size: 1.3rem;
-            color: #ffffff;
-        }
-        
-        p {
-            margin-bottom: 20px;
-            color: #a0a0a0;
-            font-size: 1rem;
-            line-height: 1.7;
-        }
-        
-        .highlight {
-            color: #ff3838;
-            font-weight: 500;
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-            color: #b0b0b0;
-            max-width: 700px;
-            margin: 0 auto 30px;
-        }
-        
-        /* Botones de acción */
-        .btn {
-            background: linear-gradient(to right, #ff3838, #ff6b6b);
-            color: white;
-            border: none;
-            padding: 16px 35px;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-block;
-            margin-top: 20px;
-            letter-spacing: 0.5px;
-            width: 100%;
-            max-width: 300px;
-            text-align: center;
-            text-decoration: none;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255, 56, 56, 0.25);
-            background: linear-gradient(to right, #ff4d4d, #ff7f7f);
-        }
-        
-        /* Formulario y mensajes */
-        .form-content {
-            background-color: #1a1a1a;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-            max-width: 600px;
-            width: 90%;
-            margin: 0 auto;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: #e0e0e0;
-        }
-
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #333;
-            background-color: #222;
-            color: #fff;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: #ff3838;
-            box-shadow: 0 0 0 3px rgba(255, 56, 56, 0.2);
-        }
-        .form-btn {
-            width: 100%;
-            padding: 15px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            border-radius: 10px;
-            margin: 0 auto;
-            display: block;
-        }
-        
-        .result-message {
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 10px;
-            font-weight: bold;
-            text-align: center;
-        }
-
-        .result-message.success {
-            background-color: rgba(46, 204, 113, 0.2);
-            color: #2ecc71;
-        }
-
-        .result-message.failure {
-            background-color: rgba(231, 76, 60, 0.2);
-            color: #e74c3c;
-        }
-        
-        /* Nuevo diseño para la sección de beneficios */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1100px;
-            margin: 0 auto 40px;
-        }
-
-        .benefit-card {
-            background-color: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
-        }
-        
-        .benefit-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        html, body {
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, rgba(255, 56, 56, 0.2), rgba(255, 107, 107, 0.1));
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            pointer-events: none;
-            z-index: 0;
+            overflow-x: hidden;
         }
 
-        .benefit-card:hover::before {
-            opacity: 1;
-        }
-
-        .benefit-card-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .benefit-icon {
-            font-size: 2.5rem;
-            color: #ff3838;
-            margin-bottom: 20px;
-            display: block;
-            text-align: center;
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-
-        .benefit-card:hover .benefit-icon {
-            transform: scale(1.1) rotate(5deg);
-            filter: drop-shadow(0 0 10px #ff3838);
-        }
-        
-        .benefit-card h3 {
-            text-align: center;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .benefit-card p {
-            text-align: center;
-            font-size: 0.9rem;
-            margin: 0;
-            color: #a0a0a0;
-        }
-        
-        /* Animaciones */
-        .revealing-content {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-
-        .revealing-content.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .text-glitch {
-            white-space: nowrap;
-        }
-        
-        /* Estilos específicos para la versión móvil del título de beneficios */
-        .benefits-title-mobile {
-            display: none;
-        }
-        
-        /* Estilo específico para el título de beneficios en escritorio */
-        .benefits-title-desktop {
-            font-size: 2.5rem;
-            background: linear-gradient(to right, #ff3838, #ff6b6b);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 15px rgba(255, 56, 56, 0.5);
-            letter-spacing: 1px;
-        }
-        
-        /* Efectos especiales */
-        .gradient-bg {
-            position: fixed;
-            top: -200px;
-            right: -200px;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 56, 56, 0.15) 0%, transparent 70%);
-            z-index: -1;
-        }
-        
-        .gradient-bg-2 {
-            position: absolute;
-            bottom: -200px;
-            left: -200px;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(255, 56, 56, 0.1) 0%, transparent 70%);
-            z-index: -1;
-        }
-        
-        /* Mejoras de adaptabilidad para móviles */
-        @media (min-width: 769px) {
-            .benefits-list {
-                justify-content: center;
-            }
-            .benefit-item {
-                width: 300px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            header {
-                padding: 20px 0;
-            }
-            
-            .logo {
-                font-size: 1.8rem;
-            }
-            
-            .hero {
-                padding: 60px 0 40px;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h2 {
-                font-size: 1.6rem;
-            }
-            
-            h3 {
-                font-size: 1.2rem;
-            }
-            
-            .subtitle {
-                font-size: 1rem;
-            }
-            
-            section {
-                padding: 40px 0;
-            }
-            
-            .modal-content {
-                padding: 30px 20px;
-            }
-            .benefit-item {
-                max-width: none;
-                width: 100%;
-            }
-            /* Centrado del pie de página */
-            .footer-content {
-                justify-content: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-            
-            .logo {
-                font-size: 1.6rem;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            h2 {
-                font-size: 1.4rem;
-            }
-            
-            .btn, .add-to-cart {
-                padding: 14px 25px;
-                font-size: 1rem;
-            }
-            .text-glitch {
-                white-space: normal;
-                line-height: 1.1;
-                font-size: 3.2rem;
-            }
-            /* Título de beneficios en móvil */
-            .benefits-title-desktop {
-                display: none;
-            }
-            .benefits-title-mobile {
-                display: block;
-                font-size: 4.2rem;
-                letter-spacing: -1px;
-            }
-            /* Tamaño de la leyenda del footer en móvil */
-            .copyright {
-                font-size: 0.8rem;
-            }
-        }
-        
-        .footer-content {
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             display: flex;
             flex-direction: column;
             align-items: center;
+            /* Espacio para el footer fijo */
+            padding-bottom: 80px; 
+        }
+
+        /* --- 2. Contenedor Principal y Pantallas --- */
+        .app-container {
+            width: 100%;
+            max-width: 700px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 80px); /* Resta el padding del footer */
+            flex-grow: 1;
+        }
+
+        .screen {
+            display: none; /* Oculto por defecto */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
             text-align: center;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
-        /* ********************************************** */
-        /* NUEVO ESTILO PARA LA PÁGINA DE ÉXITO */
-        /* ********************************************** */
-        .success-message {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2ecc71; /* Verde de éxito */
-            text-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
-            margin-bottom: 25px;
+        /* La pantalla activa se muestra como flex */
+        .screen.active {
+            display: flex;
         }
 
-        .success-highlight {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #f1c40f, #e67e22); /* Dorado/Naranja para impacto */
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: block;
-            margin: 20px 0;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 3. Tipografía y Elementos Comunes --- */
+        h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 10px;
             line-height: 1.1;
         }
 
-        .success-hero .subtitle {
-             max-width: 900px;
-             font-size: 1.25rem;
-             color: #e0e0e0;
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--text-color);
+        }
+
+        p, label {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .highlight {
+            color: var(--primary-green);
+        }
+
+        .btn {
+            background: var(--gradient);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 50px;
+            padding: 18px 40px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            width: 100%; /* Botones ocupan todo el ancho en móvil */
+            max-width: 350px; /* Límite en desktop */
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.2);
+        }
+
+        .btn:disabled {
+            background: var(--border-color);
+            color: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* --- 4. Barra de Progreso --- */
+        .progress-container {
+            width: 100%;
+            height: 12px;
+            background-color: var(--input-bg);
+            border-radius: 10px;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%; /* Controlado por JS */
+            height: 100%;
+            background: var(--gradient);
+            border-radius: 10px;
+            transition: width 0.5s ease-out;
+        }
+
+        /* --- 5. Tarjeta Interactiva (para Beneficios y Formulario) --- */
+        .interactive-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+            text-align: left; /* Alineado a la izquierda para el formulario */
+        }
+        
+        #benefit-text {
+            font-size: 1.3rem;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+            text-align: center; /* Centrado para beneficios */
+        }
+        
+        /* --- 6. Pantalla Formulario (Estilo Didáctico) --- */
+        #form-step-label {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        #form-step-label .label-icon {
+            display: inline-block;
+            margin-right: 8px;
+            color: var(--primary-green);
+        }
+
+        #form-step-input-container {
+            width: 100%;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            padding: 14px 16px;
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-color);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+        }
+
+        /* Estilo para placeholder de select */
+        select {
+            color: var(--text-muted);
+        }
+        select.has-value {
+            color: var(--text-color);
+        }
+        option {
+            background-color: var(--input-bg);
+            color: var(--text-color);
+        }
+
+
+        /* Ocultar flechas en input number */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+        
+        .step-validation-message {
+            color: var(--error-red);
+            font-size: 0.95rem;
+            text-align: left;
+            margin-top: 15px;
+            min-height: 20px;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        /* --- 7. Pantalla Final (Aceptado y Rechazado) --- */
+        .final-text {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin: 20px 0;
+            max-width: 500px;
+        }
+
+        .final-text strong {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin: 10px 0;
+        }
+
+        .final-text .date {
+            color: var(--primary-green);
+            font-weight: 700;
+        }
+
+        /* --- 8. Footer Fijo --- */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #000;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            padding: 20px;
+            z-index: 100;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* --- 9. Responsive --- */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            .app-container {
+                padding: 15px;
+                min-height: calc(100vh - 75px); /* Ajuste para footer más pequeño */
+            }
+            body {
+                padding-bottom: 75px;
+            }
+            .interactive-card {
+                padding: 25px;
+                min-height: 200px;
+            }
+            #benefit-text {
+                font-size: 1.15rem;
+            }
+            #form-step-label {
+                font-size: 1.1rem;
+            }
+            footer {
+                padding: 15px;
+            }
+            footer p {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="gradient-bg"></div>
-    <div class="gradient-bg-2"></div>
 
-    <header>
-        <div class="container">
-        </div>
-    </header>
+    <div class="app-container">
 
-    <section class="hero" id="hero-section">
-        <div class="container">
-            <h1 id="glitch-text" class="text-glitch"></h1>
-            <div id="content-to-show" class="revealing-content">
-                <p class="subtitle">Completa el formulario para registrarte</p>
-                <button id="openBenefitsBtn" class="btn">Completa el formulario</button>
+        <!-- ======================================= -->
+        <!-- == PANTALLA 1: BIENVENIDA              == -->
+        <!-- ======================================= -->
+        <section class="screen active" id="welcome-screen">
+            <h1>Bienvenidos a <span class="highlight">Power Labz</span></h1>
+            <p class="subtitle">Completa el formulario para registrarte en el CREW</p>
+            <button class="btn" id="start-btn">Completar el formulario</button>
+        </section>
+
+        <!-- ======================================= -->
+        <!-- == PANTALLA 2: BENEFICIOS            == -->
+        <!-- ======================================= -->
+        <section class="screen" id="benefits-screen">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-benefits"></div>
             </div>
-        </div>
-    </section>
-
-    <!-- Sección de Beneficios -->
-    <section class="benefits" id="benefits-section">
-        <div class="container" style="text-align: center;">
-            <h2 class="section-title benefits-title-desktop">Beneficios exclusivos</h2>
-            <h2 class="section-title benefits-title-mobile">Beneficios<br>Exclusivos</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-card-content">
-                        <i class="fas fa-box-open benefit-icon"></i>
-                        <h3>Suplementos Gratis</h3>
-                        <p>Recibirás 1 o 2 productos al mes sin costo unicamente pagas el envío.</p>
-                    </div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-card-content">
-                        <i class="fas fa-bolt benefit-icon"></i>
-                        <h3>Precio de Atleta</h3>
-                        <p>Acceso a precios especiales en todo nuestro catálogo de productos.</p>
-                    </div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-card-content">
-                        <i class="fas fa-calendar-alt benefit-icon"></i>
-                        <h3>9 Meses de Patrocinio</h3>
-                        <p>Un contrato de 9 meses que asegura tu permanencia y beneficios con la marca.</p>
-                    </div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-card-content">
-                        <i class="fas fa-handshake benefit-icon"></i>
-                        <h3>Oportunidad de Distribuidor</h3>
-                        <p>Posibilidad de convertirte en distribuidor y generar ingresos extra.</p>
-                    </div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-card-content">
-                        <i class="fas fa-tags benefit-icon"></i>
-                        <h3>Descuentos Adicionales</h3>
-                        <p>Obtén descuentos exclusivos para tus seguidores y amigos.</p>
-                    </div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-card-content">
-                        <i class="fas fa-chart-line benefit-icon"></i>
-                        <h3>Impulso a tu Carrera</h3>
-                        <p>Apoyo para crecer tu marca personal y tu presencia en redes sociales.</p>
-                    </div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-card-content">
-                        <i class="fas fa-bullhorn benefit-icon"></i>
-                        <h3>Mención en Redes</h3>
-                        <p>Debes mencionarnos y promocionarnos en nuestras redes sociales, incluyendo historias y publicaciones.</p>
-                    </div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-card-content">
-                        <i class="fas fa-mobile-screen benefit-icon"></i>
-                        <h3>Mención en Historias</h3>
-                        <p>Debes mencionarnos en historias con nuestros productos en redes sociales.</p>
-                    </div>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-card-content">
-                        <i class="fas fa-camera benefit-icon"></i>
-                        <h3>Etiquetas y Contenido</h3>
-                        <p>Comparte contenido, etiquétenos y tu publicación podría ser destacada en nuestro perfil.</p>
-                    </div>
-                </div>
+            <h2>Beneficios del CREW</h2>
+            <div class="interactive-card">
+                <p id="benefit-text">Cargando...</p>
             </div>
-            <button id="openFormBtn" class="btn">Continuar</button>
-        </div>
-    </section>
+            <button class="btn" id="next-benefit-btn">Continuar</button>
+        </section>
 
-    <!-- Sección del Formulario -->
-    <section class="form-section" id="form-section">
-        <div class="form-content">
-            <h2 style="text-align: center; color: #fff;">Completa el formulario para aplicar.</h2>
-            <form id="patrocinioForm">
-                <div class="form-group">
-                    <label for="nombre">Nombre completo:</label>
-                    <input type="text" id="nombre" name="nombre" required>
-                </div>
-                <div class="form-group">
-                    <label for="edad">Edad:</label>
-                    <input type="number" id="edad" name="edad" required min="10" max="99">
-                </div>
-                <div class="form-group">
-                    <label for="ciudad">Ciudad:</label>
-                    <input type="text" id="ciudad" name="ciudad" required>
-                </div>
-                <!-- Nuevo campo de Instagram -->
-                <div class="form-group">
-                    <label for="instagram">Usuario de Instagram:</label>
-                    <input type="text" id="instagram" name="instagram" placeholder="@" required>
-                </div>
-                <div class="form-group">
-                    <label for="entrenando">¿Cuánto tiempo llevas entrenando?</label>
-                    <select id="entrenando" name="entrenando" required>
-                        <option value="">Selecciona una opción</option>
-                        <option value="menor-a-6-meses">menos de 6 meses</option>
-                        <option value="6-meses">6 meses</option>
-                        <option value="1-year">1 año</option>
-                        <option value="1-3-years">1-3 años</option>
-                        <option value="3-6-years">3-6 años</option>
-                        <option value="mas-6-years">mas de 6 años</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="suplementos">¿Usas suplementos deportivos?</label>
-                    <select id="suplementos" name="suplementos" required>
-                        <option value="">Selecciona una opción</option>
-                        <option value="si">Sí</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
-                <div class="form-group" id="suplementosDetails" style="display: none;">
-                    <label for="cuales-frecuencia">¿Cuáles y con qué frecuencia?</label>
-                    <textarea id="cuales-frecuencia" name="cuales-frecuencia" rows="3"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="patrocinado">¿Te ha patrocinado otra marca antes?</label>
-                    <select id="patrocinado" name="patrocinado" required>
-                        <option value="">Selecciona una opción</option>
-                        <option value="si">Sí</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
-                <!-- Nuevo campo condicional para el patrocinio actual -->
-                <div class="form-group" id="patrocinioActual" style="display: none;">
-                    <label for="cuentas-actualmente">¿Cuentas con el patrocinio actualmente?</label>
-                    <select id="cuentas-actualmente" name="cuentas-actualmente">
-                        <option value="">Selecciona una opción</option>
-                        <option value="si">Sí</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn form-btn">Enviar</button>
-            </form>
-            <div id="resultMessage" class="result-message" style="display: none;"></div>
-        </div>
-    </section>
-
-    <!-- Nueva Sección de Éxito (estilo hero) -->
-    <section class="hero success-hero" id="success-hero">
-        <div class="container">
-            <h1 id="glitch-text-success" class="text-glitch"></h1>
-            <div id="content-to-show-success" class="revealing-content">
-                <!-- TEXTO MODIFICADO -->
-                <p class="success-message">¡FELICIDADES! ESTÁS DENTRO DEL CREW</p>
-                <p class="success-highlight">RECIBE TU PRIMER PATROCINIO HOY MISMO</p>
-                <p class="subtitle">Tu primer paquete de patrocinio se enviará a partir del <span id="first-sponsorship-date-text" style="color: #ff3838; font-weight: bold;"></span>. Envíanos un mensaje para confirmar tu lugar y coordinar tu primer envío.</p>
-                <!-- El botón ahora tiene atributos de datos para almacenar la info del formulario -->
-                <button id="sendWhatsappBtn" class="btn form-btn" data-form-data="" data-sponsorship-date="">¡Confirmar mi Patrocinio Ahora!</button>
+        <!-- ======================================= -->
+        <!-- == PANTALLA 3: REGISTRO              == -->
+        <!-- ======================================= -->
+        <section class="screen" id="form-screen">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-form"></div>
             </div>
-        </div>
-    </section>
-    
-    <footer id="footer" class="revealing-content">
-        <div class="container footer-content">
-            <div class="logo">Power Labz</div>
-            <p class="copyright">© 2025 Power Labz. Suplementación deportiva de alta calidad.</p>
-        </div>
+            <h2>Tu Registro</h2>
+            
+            <div class="interactive-card" id="form-card">
+                <label for="current-input" id="form-step-label">Cargando...</label>
+                <div id="form-step-input-container">
+                    <!-- El input o select se inyectará aquí -->
+                </div>
+                <div class="step-validation-message" id="step-validation"></div>
+            </div>
+            
+            <button class="btn" id="form-next-btn">Siguiente</button>
+        </section>
+
+        <!-- ======================================= -->
+        <!-- == PANTALLA 4: FINAL (ACEPTADO)      == -->
+        <!-- ======================================= -->
+        <section class="screen" id="final-screen">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-final-accept"></div>
+            </div>
+            <h2>¡<span class="highlight">FELICIDADES!</span><br>YA CASI ESTÁS DENTRO</h2>
+            <p class="final-text">
+                Tu primer paquete de patrocinio se enviará a partir del <strong class="date" id="current-date-span">[FECHA ACTUAL]</strong>
+                Envíanos un mensaje para confirmar tu lugar y coordinar tu primer envío.
+            </p>
+            <button class="btn" id="whatsapp-btn">Recibir mi patrocinio ahora</button>
+        </section>
+
+        <!-- ======================================= -->
+        <!-- == N U E V O: PANTALLA 5: FINAL (RECHAZO) == -->
+        <!-- ======================================= -->
+        <section class="screen" id="rejection-screen">
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-final-reject"></div>
+            </div>
+            <h2>GRACIAS POR PARTICIPAR</h2>
+            <p class="final-text" style="color: var(--text-color);">
+                Lamentablemente, en esta ocasión no podemos patrocinarte.
+                <br><br>
+                ¡Pero no te desanimes y sigue participando en futuras convocatorias!
+            </p>
+            <!-- Sin botón de acción -->
+        </section>
+
+    </div>
+
+    <!-- ======================================= -->
+    <!-- == FOOTER FIJO                       == -->
+    <!-- ======================================= -->
+    <footer>
+        <p>Power Labz © 2025. Suplementación deportiva de alta calidad.</p>
     </footer>
-    
+
     <script>
-        // Efecto de texto cifrado
-        const glitchText = document.getElementById('glitch-text');
-        const glitchTextSuccess = document.getElementById('glitch-text-success');
-        const originalText = "Bienvenidos a Power Labz";
-        // TÍTULO DE ÉXITO MODIFICADO
-        const successText = "¡Crew Power Labz!"; 
-        const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;':\",./<>?`~";
-        let interval = null;
+        document.addEventListener('DOMContentLoaded', () => {
 
-        function decryptText(finalText, element, callback) {
-            let iteration = 0;
-            clearInterval(interval);
-            
-            interval = setInterval(() => {
-                const newText = finalText.split('').map((char, index) => {
-                    if (index < iteration) {
-                        return finalText[index];
-                    }
-                    return characters[Math.floor(Math.random() * characters.length)];
-                });
-                
-                element.innerText = newText.join('');
-
-                if (iteration >= finalText.length) {
-                    clearInterval(interval);
-                    if (callback) {
-                        callback();
-                    }
-                }
-                iteration += 1;
-            }, 50);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const contentToShow = document.getElementById('content-to-show');
-            const footer = document.getElementById('footer');
-
-            // Inicia el efecto de texto cifrado y, una vez que termina, muestra todo el contenido.
-            decryptText(originalText, glitchText, () => {
-                contentToShow.classList.add('active');
-                footer.classList.add('active');
-            });
-        });
-
-        // Lógica de navegación entre secciones
-        const heroSection = document.getElementById('hero-section');
-        const benefitsSection = document.getElementById('benefits-section');
-        const formSection = document.getElementById('form-section');
-        const openBenefitsBtn = document.getElementById('openBenefitsBtn');
-        const openFormBtn = document.getElementById('openFormBtn');
-        const form = document.getElementById('patrocinioForm');
-        const resultMessage = document.getElementById('resultMessage');
-        const suplementosSelect = document.getElementById('suplementos');
-        const suplementosDetails = document.getElementById('suplementosDetails');
-        const entrenandoSelect = document.getElementById('entrenando');
-        const successHero = document.getElementById('success-hero');
-        const contentToShowSuccess = document.getElementById('content-to-show-success');
-        const sendWhatsappBtn = document.getElementById('sendWhatsappBtn');
-        const patrocinadoSelect = document.getElementById('patrocinado');
-        const patrocinioActualSelect = document.getElementById('cuentas-actualmente');
-        const patrocinioActualGroup = document.getElementById('patrocinioActual');
-        // ELEMENTO DE TEXTO DE LA FECHA ACTUALIZADO
-        const firstSponsorshipDateText = document.getElementById('first-sponsorship-date-text');
-
-        // **********************************************
-        // LÓGICA: Lista de números para WhatsApp
-        // **********************************************
-        const whatsappNumbers = [
-            '525629554857',  // +52 1 55 2955 4857
-        ];
-
-        // Función para seleccionar un número de WhatsApp aleatoriamente
-        function getRandomWhatsappNumber() {
-            const randomIndex = Math.floor(Math.random() * whatsappNumbers.length);
-            return whatsappNumbers[randomIndex];
-        }
-
-        // Mostrar sección de beneficios
-        openBenefitsBtn.addEventListener('click', () => {
-            heroSection.style.display = 'none';
-            benefitsSection.style.display = 'block';
-            benefitsSection.classList.add('active');
-        });
-
-        // Mostrar sección del formulario
-        openFormBtn.addEventListener('click', () => {
-            benefitsSection.style.display = 'none';
-            formSection.style.display = 'block';
-            formSection.classList.add('active');
-        });
-
-        // Mostrar campo de detalles de suplementos si se selecciona 'Sí'
-        suplementosSelect.addEventListener('change', (e) => {
-            if (e.target.value === 'si') {
-                suplementosDetails.style.display = 'block';
-            } else {
-                suplementosDetails.style.display = 'none';
-            }
-        });
-
-        // Lógica para mostrar/ocultar el campo de patrocinio actual
-        patrocinadoSelect.addEventListener('change', (e) => {
-            if (e.target.value === 'si') {
-                patrocinioActualGroup.style.display = 'block';
-                patrocinioActualSelect.setAttribute('required', 'required');
-            } else {
-                patrocinioActualGroup.style.display = 'none';
-                patrocinioActualSelect.removeAttribute('required');
-            }
-        });
-
-        // Lógica de validación del formulario
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const edad = parseInt(document.getElementById('edad').value);
-            const suplementos = document.getElementById('suplementos').value;
-            const entrenando = entrenandoSelect.value;
-            const patrocinado = patrocinadoSelect.value;
-            const patrocinioActual = document.getElementById('cuentas-actualmente').value;
-            
-            // Captura de todos los datos del formulario para el mensaje de WhatsApp
-            const formData = {
-                nombre: document.getElementById('nombre').value,
-                edad: edad,
-                ciudad: document.getElementById('ciudad').value,
-                instagram: document.getElementById('instagram').value,
-                entrenando: document.getElementById('entrenando').options[document.getElementById('entrenando').selectedIndex].text,
-                suplementos: document.getElementById('suplementos').options[document.getElementById('suplementos').selectedIndex].text,
-                cualesFrecuencia: suplementos === 'si' ? document.getElementById('cuales-frecuencia').value : 'No aplica',
-                patrocinado: document.getElementById('patrocinado').options[document.getElementById('patrocinado').selectedIndex].text,
-                patrocinioActual: patrocinado === 'si' ? document.getElementById('cuentas-actualmente').options[document.getElementById('cuentas-actualmente').selectedIndex].text : 'No aplica'
+            // --- 1. Almacén de Estado y Datos ---
+            const state = {
+                currentScreen: 'welcome',
+                currentBenefit: 0,
+                currentFormStep: 0,
+                formData: {},
+                isAccepted: false // N U E V O: Estado de aceptación
             };
 
-            let message = '';
+            const benefitMessages = [
+                "<strong>Suplementos Gratis</strong> – Recibirás 1 o 2 productos al mes sin costo, únicamente pagas el envío.",
+                "<strong>Precio de Atleta</strong> – Acceso a precios especiales en todo nuestro catálogo de productos.",
+                "<strong>9 Meses de Patrocinio</strong> – Un contrato de 9 meses que asegura tu permanencia y beneficios con la marca.",
+                "<strong>Oportunidad de Distribuidor</strong> – Posibilidad de convertirte en distribuidor y generar ingresos extra.",
+                "<strong>Mención en Redes</strong> – Debes mencionarnos y promocionarnos en nuestras redes sociales, incluyendo historias y publicaciones.",
+                "<strong>Mención en Historias</strong> – Debes mencionarnos en historias con nuestros productos en redes sociales.",
+                "<strong>Etiquetas y Contenido</strong> – Comparte contenido, etiquétanos y tu publicación podría ser destacada en nuestro perfil."
+            ];
             
-            // Validaciones
-            if (edad < 19) {
-                message = 'Lo sentimos, no podemos patrocinarte por tu edad.';
-            } else if (suplementos === 'no') {
-                message = 'Lo sentimos, no podemos patrocinarte ya que es indispensable que uses suplementos.';
-            } else if (entrenando === 'menor-a-6-meses') {
-                message = 'Lo sentimos, el tiempo mínimo de entrenamiento para ser apto es de 6 meses.';
-            } else if (patrocinado === 'si' && patrocinioActual === 'si') {
-                message = 'Lo sentimos, no podemos patrocinarte si ya tienes un patrocinio activo con otra marca.';
-            }
+            const formSteps = [
+                {
+                    id: 'name',
+                    label: '¿Cómo te llamas?',
+                    icon: '👤',
+                    type: 'text',
+                    placeholder: 'Tu nombre completo',
+                    validation: (val) => val.trim() !== '',
+                    error: 'Por favor, dinos tu nombre.'
+                },
+                {
+                    id: 'age',
+                    label: '¿Cuántos años tienes?',
+                    icon: '🎂',
+                    type: 'number',
+                    placeholder: 'Ej: 25',
+                    validation: (val) => /^\d+$/.test(val) && parseInt(val, 10) > 0,
+                    error: 'Por favor, ingresa una edad válida.'
+                    // Lógica de rechazo movida al final
+                },
+                {
+                    id: 'city',
+                    label: '¿En qué ciudad estás?',
+                    icon: '📍',
+                    type: 'text',
+                    placeholder: 'Ej: Ciudad de México',
+                    validation: (val) => val.trim() !== '',
+                    error: 'Por favor, dinos tu ciudad.'
+                },
+                {
+                    id: 'instagram',
+                    label: '¿Cuál es tu usuario de Instagram?',
+                    icon: '📱',
+                    type: 'text',
+                    placeholder: '@tuusuario',
+                    validation: (val) => val.trim() !== '',
+                    error: 'Por favor, ingresa tu usuario de Instagram.'
+                },
+                {
+                    id: 'training',
+                    label: '¿Cuánto tiempo llevas entrenando?',
+                    icon: '🏋️',
+                    type: 'select',
+                    options: ['Menos de 6 meses', '6 meses', '9 meses', '1 año', '1-3 años', '3-6 años', 'Más de 6 años'],
+                    validation: (val) => val !== '',
+                    error: 'Por favor, selecciona una opción.'
+                },
+                {
+                    id: 'supplements',
+                    label: '¿Usas suplementos deportivos?',
+                    icon: '💊',
+                    type: 'select',
+                    options: ['Sí', 'No'],
+                    validation: (val) => val !== '',
+                    error: 'Por favor, selecciona una opción.'
+                },
+                {
+                    id: 'supplementsWhich',
+                    label: '¿Cuáles consumes?',
+                    icon: '💊',
+                    type: 'text',
+                    placeholder: 'Ej: Proteína, creatina...',
+                    validation: (val) => val.trim() !== '',
+                    error: 'Por favor, dinos qué suplementos consumes.',
+                    dependsOn: { id: 'supplements', value: 'Sí' } 
+                },
+                {
+                    id: 'sponsorship',
+                    label: '¿Te ha patrocinado otra marca antes?',
+                    icon: '🤝',
+                    type: 'select',
+                    options: ['Sí', 'No'],
+                    validation: (val) => val !== '',
+                    error: 'Por favor, selecciona una opción.'
+                },
+                {
+                    id: 'currentSponsorship',
+                    label: '¿Cuentas con el patrocinio ahora mismo?',
+                    icon: '🤝',
+                    type: 'select',
+                    options: ['Sí', 'No'],
+                    validation: (val) => val !== '',
+                    error: 'Por favor, selecciona una opción.',
+                    dependsOn: { id: 'sponsorship', value: 'Sí' }
+                }
+            ];
 
-            // Muestra el mensaje si hay uno (rechazo) o el de éxito si no hay mensaje
-            if (message) {
-                resultMessage.textContent = message;
-                resultMessage.style.display = 'block';
-                resultMessage.className = `result-message failure`;
-            } else {
-                // Calcular la fecha del próximo mes
-                const today = new Date();
-                today.setMonth(today.getMonth() + 1);
-                const firstSponsorshipDate = today.toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-                
-                // Almacenar los datos en el botón para su uso posterior
-                sendWhatsappBtn.dataset.formData = JSON.stringify(formData);
-                sendWhatsappBtn.dataset.sponsorshipDate = firstSponsorshipDate;
-                
-                // Actualizar y mostrar la sección de éxito
-                // TEXTO DE FECHA ACTUALIZADO
-                firstSponsorshipDateText.textContent = firstSponsorshipDate;
+            const mainWhatsAppNumber = '5215629554857';
 
-                formSection.style.display = 'none';
-                successHero.style.display = 'block';
-                
-                // Aplicar el efecto "glitch" y fade-in en la sección de éxito
-                decryptText(successText, glitchTextSuccess, () => {
-                    contentToShowSuccess.classList.add('active');
-                });
-            }
-        });
-
-        // Lógica del botón de WhatsApp (MODIFICADA para reflejar el nuevo texto)
-        sendWhatsappBtn.addEventListener('click', () => {
-            const formData = JSON.parse(sendWhatsappBtn.dataset.formData);
-            const sponsorshipDate = sendWhatsappBtn.dataset.sponsorshipDate;
+            // --- 2. Selectores del DOM ---
+            const screens = document.querySelectorAll('.screen');
+            const startBtn = document.getElementById('start-btn');
+            const nextBenefitBtn = document.getElementById('next-benefit-btn');
+            const formNextBtn = document.getElementById('form-next-btn');
+            const whatsappBtn = document.getElementById('whatsapp-btn');
             
-            // 1. Obtiene un número de teléfono aleatorio
-            const selectedNumber = getRandomWhatsappNumber(); 
+            const formLabel = document.getElementById('form-step-label');
+            const formInputContainer = document.getElementById('form-step-input-container');
+            const stepValidation = document.getElementById('step-validation');
+
+            const progressBars = {
+                benefits: document.getElementById('progress-benefits'),
+                form: document.getElementById('progress-form'),
+                finalAccept: document.getElementById('progress-final-accept'),
+                finalReject: document.getElementById('progress-final-reject')
+            };
             
-            // Construye el mensaje con los datos del formulario
-            let whatsappMessage = `¡Hola! ¡Felicidades, estoy dentro del Crew Power Labz! Quiero confirmar mi patrocinio y coordinar mi primer envío lo antes posible.\n\n`;
-            whatsappMessage += `Mis datos de registro:\n`;
-            whatsappMessage += `Nombre: ${formData.nombre}\n`;
-            whatsappMessage += `Edad: ${formData.edad}\n`;
-            whatsappMessage += `Ciudad: ${formData.ciudad}\n`;
-            whatsappMessage += `Instagram: ${formData.instagram}\n`;
-            whatsappMessage += `Tiempo entrenando: ${formData.entrenando}\n`;
-            whatsappMessage += `Uso de suplementos: ${formData.suplementos}\n`;
-            if (formData.suplementos === 'Sí') {
-                whatsappMessage += `Cuáles y con qué frecuencia?: ${formData.cualesFrecuencia}\n`;
-            }
-            whatsappMessage += `Patrocinado antes: ${formData.patrocinado}\n`;
-            if (formData.patrocinado === 'Sí') {
-                whatsappMessage += `Patrocinio actual: ${formData.patrocinioActual}\n`;
-            }
-            whatsappMessage += `\nFecha de mi primer patrocinio: ${sponsorshipDate}.`;
 
+            // --- 3. Funciones Principales ---
 
-            const encodedMessage = encodeURIComponent(whatsappMessage);
-            // 2. Utiliza el número seleccionado aleatoriamente en la URL
-            const whatsappUrl = `https://wa.me/${selectedNumber}?text=${encodedMessage}`;
-            window.open(whatsappUrl, '_blank');
+            function navigateTo(screenId) {
+                screens.forEach(screen => screen.classList.remove('active'));
+                const targetScreen = document.getElementById(screenId);
+                if (targetScreen) targetScreen.classList.add('active');
+                state.currentScreen = screenId;
+                window.scrollTo(0, 0);
+            }
+
+            function updateProgress(screenKey, width) {
+                if (progressBars[screenKey]) {
+                    progressBars[screenKey].style.width = width;
+                }
+            }
+
+            function showBenefit(index) {
+                const benefitTextEl = document.getElementById('benefit-text');
+                if (benefitTextEl) {
+                    benefitTextEl.style.opacity = '0';
+                    setTimeout(() => {
+                        benefitTextEl.innerHTML = benefitMessages[index];
+                        benefitTextEl.style.opacity = '1';
+                    }, 300);
+                }
+            }
+            
+            function renderCurrentFormStep() {
+                stepValidation.textContent = '';
+                
+                let step = formSteps[state.currentFormStep];
+
+                if (step.dependsOn) {
+                    const parentValue = state.formData[step.dependsOn.id];
+                    if (parentValue !== step.dependsOn.value) {
+                        // Rellenar con N/A y saltar
+                        state.formData[step.id] = 'N/A';
+                        state.currentFormStep++;
+                        if (state.currentFormStep >= formSteps.length) {
+                            evaluateAndTransition();
+                        } else {
+                            renderCurrentFormStep();
+                        }
+                        return;
+                    }
+                }
+
+                formLabel.innerHTML = `<span class="label-icon">${step.icon}</span> ${step.label}`;
+                let inputHtml = '';
+                
+                switch(step.type) {
+                    case 'text':
+                    case 'number':
+                        inputHtml = `<input type="${step.type}" id="step-${step.id}" placeholder="${step.placeholder}" value="">`;
+                        break;
+                    case 'select':
+                        let optionsHtml = '<option value="" disabled selected>Por favor, selecciona algo</option>';
+                        optionsHtml += step.options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+                        inputHtml = `<select id="step-${step.id}">${optionsHtml}</select>`;
+                        break;
+                }
+                formInputContainer.innerHTML = inputHtml;
+
+                const inputElement = document.getElementById(`step-${step.id}`);
+                if (state.formData[step.id] && state.formData[step.id] !== 'N/A') {
+                    inputElement.value = state.formData[step.id];
+                }
+
+                if (step.type === 'select') {
+                    if (inputElement.value) {
+                        inputElement.classList.add('has-value');
+                    }
+                    inputElement.addEventListener('change', () => {
+                        inputElement.classList.toggle('has-value', !!inputElement.value);
+                    });
+                }
+
+                if (state.currentFormStep === formSteps.length - 1) {
+                    formNextBtn.textContent = 'Finalizar';
+                } else {
+                    formNextBtn.textContent = 'Siguiente';
+                }
+            }
+            
+            function validateAndAdvance() {
+                let step = formSteps[state.currentFormStep];
+                const inputElement = document.getElementById(`step-${step.id}`);
+                const value = inputElement.value;
+
+                // Validación de campo requerido
+                if (!step.validation(value)) {
+                    stepValidation.textContent = step.error;
+                    return;
+                }
+                
+                // Validación exitosa
+                stepValidation.textContent = '';
+                state.formData[step.id] = value;
+                state.currentFormStep++;
+
+                updateProgress('form', `66%`); // Mantener en 66%
+                
+                if (state.currentFormStep >= formSteps.length) {
+                    evaluateAndTransition();
+                } else {
+                    renderCurrentFormStep();
+                }
+            }
+            
+            // N U E V O: Evalúa al final y transiciona a Aceptado o Rechazado
+            function evaluateAndTransition() {
+                // Por defecto, aceptado
+                let isAccepted = true;
+                
+                // Aplicar reglas de rechazo
+                if (parseInt(state.formData.age, 10) <= 18) {
+                    isAccepted = false;
+                }
+                if (state.formData.training === 'Menos de 6 meses') {
+                    isAccepted = false;
+                }
+                if (state.formData.supplements === 'No') {
+                    isAccepted = false;
+                }
+                // Si dijo 'Sí' a patrocinio y 'Sí' a patrocinio actual
+                if (state.formData.sponsorship === 'Sí' && state.formData.currentSponsorship === 'Sí') {
+                    isAccepted = false;
+                }
+                
+                state.isAccepted = isAccepted;
+
+                if (state.isAccepted) {
+                    // --- ACEPTADO ---
+                    navigateTo('final-screen');
+                    updateProgress('finalAccept', '100%');
+                    document.getElementById('current-date-span').textContent = new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
+                } else {
+                    // --- RECHAZADO ---
+                    navigateTo('rejection-screen');
+                    updateProgress('finalReject', '100%');
+                }
+            }
+
+            function sendWhatsAppMessage() {
+                const today = new Date().toLocaleDateString('es-MX');
+                const data = state.formData;
+
+                // N U E V O: Mensaje con Emojis
+                let message = `¡Hola Power Labz! 🏋️‍♂️ Quiero unirme al CREW.\n\n`;
+                message += `--- 📋 DATOS DE REGISTRO ---\n`;
+                message += `🗓️ Fecha: ${today}\n`;
+                message += `👤 Nombre: ${data.name || 'N/A'}\n`;
+                message += `🎂 Edad: ${data.age || 'N/A'}\n`;
+                message += `📍 Ciudad: ${data.city || 'N/A'}\n`;
+                message += `📱 Instagram: ${data.instagram || 'N/A'}\n`;
+                message += `💪 Tiempo Entrenando: ${data.training || 'N/A'}\n`;
+                message += `💊 Usa Suplementos: ${data.supplements || 'N/A'}\n`;
+                
+                if (data.supplements === 'Sí') {
+                    message += `   ➡️ Consume: ${data.supplementsWhich || 'N/A'}\n`;
+                }
+                
+                message += `🤝 Patrocinio Previo: ${data.sponsorship || 'N/A'}\n`;
+                
+                if (data.sponsorship === 'Sí') {
+                    message += `   ➡️ Patrocinio Actual: ${data.currentSponsorship || 'N/A'}\n`;
+                }
+                
+                message += `\n¡Espero confirmación! 🚀`;
+                
+                const encodedMessage = encodeURIComponent(message);
+                const waLink = `https://wa.me/${mainWhatsAppNumber}?text=${encodedMessage}`;
+                
+                window.open(waLink, '_blank');
+            }
+
+            // --- 4. Event Listeners ---
+
+            startBtn.addEventListener('click', () => {
+                navigateTo('benefits-screen');
+                updateProgress('benefits', '33%');
+                showBenefit(0);
+            });
+
+            nextBenefitBtn.addEventListener('click', () => {
+                state.currentBenefit++;
+                if (state.currentBenefit < benefitMessages.length) {
+                    showBenefit(state.currentBenefit);
+                } else {
+                    navigateTo('form-screen');
+                    updateProgress('form', '66%');
+                    renderCurrentFormStep();
+                }
+            });
+
+            formNextBtn.addEventListener('click', validateAndAdvance);
+            
+            whatsappBtn.addEventListener('click', sendWhatsAppMessage);
+
         });
     </script>
 </body>
