@@ -3,751 +3,491 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Power Labz Crew</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>POWER LABZ | RECLUTAMIENTO ELITE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Teko (Titulos) y Inter (Cuerpo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;400;600;700&family=Inter:wght@300;400;800&display=swap" rel="stylesheet">
+    <!-- Iconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['"Teko"', 'sans-serif'],
+                        'body': ['"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        'neon-red': '#FF1F1F',
+                        'dark-bg': '#050505',
+                        'card-bg': '#141414',
+                        'steel': '#2a2a2a',
+                        'input-bg': '#1a1a1a',
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #222 1px, transparent 1px), linear-gradient(to bottom, #222 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* --- 1. Configuración Global y Reseteo --- */
-        :root {
-            --bg-color: #121212;
-            --primary-green: #00ff88;
-            --dark-green: #00cc66;
-            --text-color: #f0f0f0;
-            --text-muted: #888;
-            --card-bg: #1a1a1a;
-            --input-bg: #222;
-            --border-color: #333;
-            --error-red: #ff6b6b;
-            --gradient: linear-gradient(90deg, var(--primary-green), var(--dark-green));
+        body {
+            background-color: #050505;
+            color: #ffffff;
+        }
+        
+        /* Grid de fondo */
+        .bg-grid {
+            background-size: 40px 40px;
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        /* Botón Cyber Industrial */
+        .cyber-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
         }
-
-        html, body {
+        
+        .cyber-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            overflow-x: hidden;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .cyber-btn:hover::before {
+            left: 100%;
         }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            /* Espacio para el footer fijo */
-            padding-bottom: 80px; 
+        .cyber-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            filter: grayscale(100%);
         }
 
-        /* --- 2. Contenedor Principal y Pantallas --- */
-        .app-container {
-            width: 100%;
-            max-width: 700px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: calc(100vh - 80px); /* Resta el padding del footer */
-            flex-grow: 1;
+        /* Tarjeta con esquinas cortadas */
+        .cut-card {
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 95% 100%, 0 100%);
+            border: 1px solid #2a2a2a;
         }
 
+        /* Inputs personalizados */
+        .tech-input {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .tech-input:focus {
+            border-color: #FF1F1F;
+            box-shadow: 0 0 15px rgba(255, 31, 31, 0.2);
+            outline: none;
+        }
+
+        /* Animación de pantallas */
         .screen {
-            display: none; /* Oculto por defecto */
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            text-align: center;
-            animation: fadeIn 0.5s ease-in-out;
+            display: none;
+            animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        /* La pantalla activa se muestra como flex */
         .screen.active {
             display: flex;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- 3. Tipografía y Elementos Comunes --- */
-        h1 {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 10px;
-            line-height: 1.1;
-        }
-
-        h2 {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 25px;
-            color: var(--text-color);
-        }
-
-        p, label {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--text-muted);
-        }
-
-        .subtitle {
-            font-size: 1.25rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-        }
-
-        .highlight {
-            color: var(--primary-green);
-        }
-
-        .btn {
-            background: var(--gradient);
-            color: var(--bg-color);
-            border: none;
-            border-radius: 50px;
-            padding: 18px 40px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 20px;
-            width: 100%; /* Botones ocupan todo el ancho en móvil */
-            max-width: 350px; /* Límite en desktop */
-        }
-
-        .btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.2);
-        }
-
-        .btn:disabled {
-            background: var(--border-color);
-            color: var(--text-muted);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
-        /* --- 4. Barra de Progreso --- */
-        .progress-container {
+        /* Barra de progreso */
+        .progress-track {
+            background: #222;
+            height: 4px;
             width: 100%;
-            height: 12px;
-            background-color: var(--input-bg);
-            border-radius: 10px;
-            margin-bottom: 40px;
-            overflow: hidden;
+            margin-bottom: 2rem;
         }
-
-        .progress-bar {
-            width: 0%; /* Controlado por JS */
+        .progress-fill {
             height: 100%;
-            background: var(--gradient);
-            border-radius: 10px;
-            transition: width 0.5s ease-out;
+            background: #FF1F1F;
+            width: 0%;
+            box-shadow: 0 0 10px #FF1F1F;
+            transition: width 0.5s ease;
         }
 
-        /* --- 5. Tarjeta Interactiva (para Beneficios y Formulario) --- */
-        .interactive-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 30px;
-            width: 100%;
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border: 1px solid var(--border-color);
-            margin-bottom: 30px;
-            text-align: left; /* Alineado a la izquierda para el formulario */
-        }
-        
-        #benefit-text {
-            font-size: 1.3rem;
-            color: var(--text-color);
-            font-weight: 500;
-            transition: opacity 0.3s ease;
-            text-align: center; /* Centrado para beneficios */
-        }
-        
-        /* --- 6. Pantalla Formulario (Estilo Didáctico) --- */
-        #form-step-label {
-            display: block;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-color);
-            margin-bottom: 20px;
-        }
-
-        #form-step-label .label-icon {
-            display: inline-block;
-            margin-right: 8px;
-            color: var(--primary-green);
-        }
-
-        #form-step-input-container {
-            width: 100%;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        select {
-            width: 100%;
-            font-family: 'Inter', sans-serif;
-            font-size: 1.1rem;
-            padding: 14px 16px;
-            background-color: var(--input-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            color: var(--text-color);
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        input[type="text"]:focus,
-        input[type="number"]:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--primary-green);
-            box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
-        }
-
-        /* Estilo para placeholder de select */
-        select {
-            color: var(--text-muted);
-        }
-        select.has-value {
-            color: var(--text-color);
-        }
-        option {
-            background-color: var(--input-bg);
-            color: var(--text-color);
-        }
-
-
-        /* Ocultar flechas en input number */
+        /* Ocultar flechas numéricas */
         input[type=number]::-webkit-inner-spin-button, 
         input[type=number]::-webkit-outer-spin-button { 
             -webkit-appearance: none; 
             margin: 0; 
         }
-        input[type=number] {
-            -moz-appearance: textfield;
-        }
-        
-        .step-validation-message {
-            color: var(--error-red);
-            font-size: 0.95rem;
-            text-align: left;
-            margin-top: 15px;
-            min-height: 20px;
-            font-weight: 500;
-            width: 100%;
-        }
-
-        /* --- 7. Pantalla Final (Aceptado y Rechazado) --- */
-        .final-text {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin: 20px 0;
-            max-width: 500px;
-        }
-
-        .final-text strong {
-            display: block;
-            font-size: 1.5rem;
-            color: var(--text-color);
-            margin: 10px 0;
-        }
-
-        .final-text .date {
-            color: var(--primary-green);
-            font-weight: 700;
-        }
-
-        /* --- 8. Footer Fijo --- */
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: #000;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-            padding: 20px;
-            z-index: 100;
-        }
-
-        footer p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        /* --- 9. Responsive --- */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            h2 {
-                font-size: 1.8rem;
-            }
-            .subtitle {
-                font-size: 1.1rem;
-            }
-            .app-container {
-                padding: 15px;
-                min-height: calc(100vh - 75px); /* Ajuste para footer más pequeño */
-            }
-            body {
-                padding-bottom: 75px;
-            }
-            .interactive-card {
-                padding: 25px;
-                min-height: 200px;
-            }
-            #benefit-text {
-                font-size: 1.15rem;
-            }
-            #form-step-label {
-                font-size: 1.1rem;
-            }
-            footer {
-                padding: 15px;
-            }
-            footer p {
-                font-size: 0.8rem;
-            }
-        }
     </style>
 </head>
-<body>
+<body class="font-body antialiased selection:bg-neon-red selection:text-white min-h-screen flex flex-col relative overflow-x-hidden pb-20">
 
-    <div class="app-container">
+    <!-- Grid Background Overlay -->
+    <div class="fixed inset-0 bg-grid-pattern bg-grid opacity-20 pointer-events-none z-0"></div>
+
+    <!-- Navbar Simplificada -->
+    <nav class="w-full bg-dark-bg/90 backdrop-blur-md border-b border-steel sticky top-0 z-50 h-16 flex items-center justify-center">
+        <div class="flex items-center gap-2">
+            <div class="w-2 h-6 bg-neon-red skew-x-[-20deg]"></div>
+            <span class="text-2xl font-display font-bold tracking-wider text-white">POWER <span class="text-neon-red">LABZ</span> CREW</span>
+        </div>
+    </nav>
+
+    <!-- Contenedor Principal -->
+    <main class="relative z-10 flex-grow flex flex-col items-center justify-center p-4 w-full max-w-2xl mx-auto">
 
         <!-- ======================================= -->
         <!-- == PANTALLA 1: BIENVENIDA              == -->
         <!-- ======================================= -->
-        <section class="screen active" id="welcome-screen">
-            <h1>Bienvenidos a <span class="highlight">Power Labz</span></h1>
-            <p class="subtitle">Completa el formulario para registrarte en el CREW</p>
-            <button class="btn" id="start-btn">Completar el formulario</button>
+        <section id="welcome-screen" class="screen active flex-col items-center text-center w-full">
+            
+            <div class="mb-8 relative">
+                <div class="absolute -inset-4 bg-neon-red/20 rounded-full blur-xl animate-pulse"></div>
+                <span class="relative inline-block py-1 px-3 border border-steel bg-black/50 text-neon-red text-xs font-bold uppercase tracking-[0.2em] backdrop-blur-sm">
+                    Reclutamiento Activo
+                </span>
+            </div>
+
+            <h1 class="font-display text-7xl md:text-9xl leading-[0.85] font-bold uppercase mb-6">
+                ¿ESTÁS <br><span class="text-neon-red">LISTO?</span>
+            </h1>
+            
+            <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-md font-light tracking-wide border-l-2 border-neon-red pl-4 text-left mx-auto">
+                Completa el protocolo de iniciación para unirte al equipo de élite.
+            </p>
+
+            <button id="start-btn" class="cyber-btn bg-neon-red text-black px-12 py-4 text-2xl font-display font-bold uppercase tracking-wider w-full md:w-auto hover:bg-white hover:text-black shadow-[0_0_20px_rgba(255,31,31,0.3)]">
+                INICIAR PROTOCOLO
+            </button>
         </section>
+
 
         <!-- ======================================= -->
         <!-- == PANTALLA 2: BENEFICIOS            == -->
         <!-- ======================================= -->
-        <section class="screen" id="benefits-screen">
-            <div class="progress-container">
-                <div class="progress-bar" id="progress-benefits"></div>
-            </div>
-            <h2>Beneficios del CREW</h2>
-            <div class="interactive-card">
-                <p id="benefit-text">Cargando...</p>
-            </div>
-            <button class="btn" id="next-benefit-btn">Continuar</button>
-        </section>
-
-        <!-- ======================================= -->
-        <!-- == PANTALLA 3: REGISTRO              == -->
-        <!-- ======================================= -->
-        <section class="screen" id="form-screen">
-            <div class="progress-container">
-                <div class="progress-bar" id="progress-form"></div>
-            </div>
-            <h2>Tu Registro</h2>
+        <section id="benefits-screen" class="screen flex-col items-center w-full">
+            <div class="progress-track"><div class="progress-fill" id="progress-benefits"></div></div>
             
-            <div class="interactive-card" id="form-card">
-                <label for="current-input" id="form-step-label">Cargando...</label>
-                <div id="form-step-input-container">
-                    <!-- El input o select se inyectará aquí -->
+            <h2 class="font-display text-5xl md:text-6xl uppercase mb-8 text-center">
+                Beneficios <span class="text-neon-red">OPERATIVOS</span>
+            </h2>
+
+            <div class="cut-card bg-card-bg p-8 w-full min-h-[280px] flex flex-col items-center justify-center mb-8 relative group">
+                <div class="absolute top-0 right-0 p-2 opacity-20">
+                    <i data-lucide="crosshair" class="w-12 h-12 text-neon-red"></i>
                 </div>
-                <div class="step-validation-message" id="step-validation"></div>
+                <p id="benefit-text" class="text-xl md:text-2xl text-center font-display uppercase tracking-wide leading-normal transition-opacity duration-300">
+                    Cargando datos del sistema...
+                </p>
             </div>
+
+            <button id="next-benefit-btn" class="cyber-btn border border-neon-red text-neon-red hover:bg-neon-red hover:text-black px-10 py-3 text-xl font-display uppercase tracking-widest w-full transition-all">
+                CONFIRMAR Y CONTINUAR
+            </button>
+        </section>
+
+
+        <!-- ======================================= -->
+        <!-- == PANTALLA 3: FORMULARIO            == -->
+        <!-- ======================================= -->
+        <section id="form-screen" class="screen flex-col items-center w-full">
+            <div class="progress-track"><div class="progress-fill" id="progress-form"></div></div>
+
+            <h2 class="font-display text-4xl md:text-5xl uppercase mb-6 text-center w-full flex items-center justify-center gap-3">
+                <i data-lucide="terminal" class="w-8 h-8 text-neon-red"></i> DATOS DE AGENTE
+            </h2>
+
+            <div class="cut-card bg-card-bg p-8 w-full mb-8 border-t-4 border-t-neon-red">
+                <label id="form-step-label" class="block font-display text-2xl uppercase text-gray-300 mb-4 tracking-wide">
+                    Cargando...
+                </label>
+                
+                <div id="form-step-input-container" class="mb-2">
+                    <!-- Input inyectado aquí -->
+                </div>
+
+                <div id="step-validation" class="h-6 text-neon-red text-sm font-mono mt-2 flex items-center gap-2">
+                    <!-- Mensajes de error aquí -->
+                </div>
+            </div>
+
+            <button id="form-next-btn" class="cyber-btn bg-white text-black hover:bg-neon-red hover:text-white px-10 py-3 text-xl font-display uppercase tracking-widest w-full">
+                SIGUIENTE
+            </button>
+        </section>
+
+
+        <!-- ======================================= -->
+        <!-- == PANTALLA 4: ACEPTADO              == -->
+        <!-- ======================================= -->
+        <section id="final-screen" class="screen flex-col items-center text-center w-full">
+            <div class="progress-track"><div class="progress-fill w-full"></div></div>
             
-            <button class="btn" id="form-next-btn">Siguiente</button>
-        </section>
-
-        <!-- ======================================= -->
-        <!-- == PANTALLA 4: FINAL (ACEPTADO)      == -->
-        <!-- ======================================= -->
-        <section class="screen" id="final-screen">
-            <div class="progress-container">
-                <div class="progress-bar" id="progress-final-accept"></div>
+            <div class="mb-6 inline-block p-4 rounded-full bg-neon-red/10 border border-neon-red animate-pulse">
+                <i data-lucide="check-circle-2" class="w-16 h-16 text-neon-red"></i>
             </div>
-            <h2>¡<span class="highlight">FELICIDADES!</span><br>YA CASI ESTÁS DENTRO</h2>
-            <p class="final-text">
-                Tu primer paquete de patrocinio se enviará a partir del <strong class="date" id="current-date-span">[FECHA ACTUAL]</strong>
-                Envíanos un mensaje para confirmar tu lugar y coordinar tu primer envío.
-            </p>
-            <button class="btn" id="whatsapp-btn">Recibir mi patrocinio ahora</button>
-        </section>
 
-        <!-- ======================================= -->
-        <!-- == N U E V O: PANTALLA 5: FINAL (RECHAZO) == -->
-        <!-- ======================================= -->
-        <section class="screen" id="rejection-screen">
-            <div class="progress-container">
-                <div class="progress-bar" id="progress-final-reject"></div>
+            <h2 class="font-display text-6xl md:text-8xl uppercase leading-[0.9] mb-6">
+                ACCESO <span class="text-neon-red">AUTORIZADO</span>
+            </h2>
+
+            <div class="cut-card bg-card-bg p-6 mb-8 border-l-4 border-l-neon-red text-left">
+                <p class="text-gray-400 font-mono text-sm uppercase tracking-widest mb-2">ESTADO DE MISIÓN:</p>
+                <p class="text-xl md:text-2xl font-display uppercase text-white leading-relaxed">
+                    Tu primer despliegue de suministros está programado a partir del:
+                    <span id="current-date-span" class="text-neon-red block text-3xl mt-1"></span>
+                </p>
             </div>
-            <h2>GRACIAS POR PARTICIPAR</h2>
-            <p class="final-text" style="color: var(--text-color);">
-                Lamentablemente, en esta ocasión no podemos patrocinarte.
-                <br><br>
-                ¡Pero no te desanimes y sigue participando en futuras convocatorias!
+
+            <p class="text-gray-500 text-sm mb-8 max-w-md">
+                Confirma tu posición táctica enviando tus datos al comando central vía WhatsApp.
             </p>
-            <!-- Sin botón de acción -->
+
+            <button id="whatsapp-btn" class="cyber-btn bg-[#25D366] text-black hover:bg-white px-8 py-4 text-xl font-display uppercase tracking-widest w-full flex items-center justify-center gap-3">
+                <i data-lucide="message-circle" class="w-6 h-6"></i> ACTIVAR PATROCINIO
+            </button>
         </section>
 
-    </div>
 
-    <!-- ======================================= -->
-    <!-- == FOOTER FIJO                       == -->
-    <!-- ======================================= -->
-    <footer>
-        <p>Power Labz © 2025. Suplementación deportiva de alta calidad.</p>
+        <!-- ======================================= -->
+        <!-- == PANTALLA 5: RECHAZADO             == -->
+        <!-- ======================================= -->
+        <section id="rejection-screen" class="screen flex-col items-center text-center w-full">
+            <div class="progress-track"><div class="progress-fill w-full bg-gray-600"></div></div>
+
+            <div class="mb-6 inline-block p-4 rounded-full bg-gray-800 border border-gray-600">
+                <i data-lucide="shield-alert" class="w-16 h-16 text-gray-500"></i>
+            </div>
+
+            <h2 class="font-display text-5xl md:text-7xl uppercase leading-[0.9] mb-6 text-gray-500">
+                ACCESO <span class="text-white">DENEGADO</span>
+            </h2>
+
+            <div class="cut-card bg-card-bg p-6 mb-8 border border-gray-700 text-left">
+                <p class="text-gray-400 font-mono text-sm uppercase tracking-widest mb-2">REPORTE DEL SISTEMA:</p>
+                <p class="text-lg text-gray-300 leading-relaxed font-light">
+                    Los parámetros actuales no cumplen con los requisitos para la asignación de recursos tácticos en este momento.
+                    <br><br>
+                    <span class="text-white font-bold">Mantén el entrenamiento.</span> El sistema reevaluará nuevos candidatos en futuras convocatorias.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer Fijo -->
+    <footer class="fixed bottom-0 left-0 w-full bg-black/90 backdrop-blur border-t border-steel py-4 px-6 z-50 flex justify-between items-center">
+        <div class="text-xs font-mono text-gray-500">SYS.VER.2.5</div>
+        <div class="text-xs font-mono text-neon-red animate-pulse">ONLINE</div>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
 
-            // --- 1. Almacén de Estado y Datos ---
+            // --- 1. Almacén de Estado ---
             const state = {
                 currentScreen: 'welcome',
                 currentBenefit: 0,
                 currentFormStep: 0,
                 formData: {},
-                isAccepted: false // N U E V O: Estado de aceptación
+                isAccepted: false
             };
 
+            // Mensajes de Beneficios (Adaptados al estilo)
             const benefitMessages = [
-                "<strong>Suplementos Gratis</strong> – Recibirás 1 o 2 productos al mes sin costo, únicamente pagas el envío.",
-                "<strong>Precio de Atleta</strong> – Acceso a precios especiales en todo nuestro catálogo de productos.",
-                "<strong>9 Meses de Patrocinio</strong> – Un contrato de 9 meses que asegura tu permanencia y beneficios con la marca.",
-                "<strong>Oportunidad de Distribuidor</strong> – Posibilidad de convertirte en distribuidor y generar ingresos extra.",
-                "<strong>Mención en Redes</strong> – Debes mencionarnos y promocionarnos en nuestras redes sociales, incluyendo historias y publicaciones.",
-                "<strong>Mención en Historias</strong> – Debes mencionarnos en historias con nuestros productos en redes sociales.",
-                "<strong>Etiquetas y Contenido</strong> – Comparte contenido, etiquétanos y tu publicación podría ser destacada en nuestro perfil."
+                "<strong>SUMINISTROS TÁCTICOS</strong> <br> <span class='text-gray-400 text-base'>Recepción mensual de 1 a 2 unidades de armamento biológico (suplementos) sin costo operativo.</span>",
+                "<strong>RANGO ÉLITE</strong> <br> <span class='text-gray-400 text-base'>Acceso a la armería con precios clasificados solo para agentes.</span>",
+                "<strong>CONTRATO DE 9 MESES</strong> <br> <span class='text-gray-400 text-base'>Garantía de permanencia y beneficios continuos en la unidad.</span>",
+                "<strong>OPERACIONES DE CAMPO</strong> <br> <span class='text-gray-400 text-base'>Posibilidad de escalar a distribuidor y generar recursos financieros.</span>",
+                "<strong>PROTOCOLOS DE COMUNICACIÓN</strong> <br> <span class='text-gray-400 text-base'>Requerimos menciones estratégicas en tus canales de transmisión (Redes Sociales).</span>"
             ];
             
+            // Pasos del Formulario
             const formSteps = [
-                {
-                    id: 'name',
-                    label: '¿Cómo te llamas?',
-                    icon: '👤',
-                    type: 'text',
-                    placeholder: 'Tu nombre completo',
-                    validation: (val) => val.trim() !== '',
-                    error: 'Por favor, dinos tu nombre.'
-                },
-                {
-                    id: 'age',
-                    label: '¿Cuántos años tienes?',
-                    icon: '🎂',
-                    type: 'number',
-                    placeholder: 'Ej: 25',
-                    validation: (val) => /^\d+$/.test(val) && parseInt(val, 10) > 0,
-                    error: 'Por favor, ingresa una edad válida.'
-                    // Lógica de rechazo movida al final
-                },
-                {
-                    id: 'city',
-                    label: '¿En qué ciudad estás?',
-                    icon: '📍',
-                    type: 'text',
-                    placeholder: 'Ej: Ciudad de México',
-                    validation: (val) => val.trim() !== '',
-                    error: 'Por favor, dinos tu ciudad.'
-                },
-                {
-                    id: 'instagram',
-                    label: '¿Cuál es tu usuario de Instagram?',
-                    icon: '📱',
-                    type: 'text',
-                    placeholder: '@tuusuario',
-                    validation: (val) => val.trim() !== '',
-                    error: 'Por favor, ingresa tu usuario de Instagram.'
-                },
-                {
-                    id: 'training',
-                    label: '¿Cuánto tiempo llevas entrenando?',
-                    icon: '🏋️',
-                    type: 'select',
-                    options: ['Menos de 6 meses', '6 meses', '9 meses', '1 año', '1-3 años', '3-6 años', 'Más de 6 años'],
-                    validation: (val) => val !== '',
-                    error: 'Por favor, selecciona una opción.'
-                },
-                {
-                    id: 'supplements',
-                    label: '¿Usas suplementos deportivos?',
-                    icon: '💊',
-                    type: 'select',
-                    options: ['Sí', 'No'],
-                    validation: (val) => val !== '',
-                    error: 'Por favor, selecciona una opción.'
-                },
-                {
-                    id: 'supplementsWhich',
-                    label: '¿Cuáles consumes?',
-                    icon: '💊',
-                    type: 'text',
-                    placeholder: 'Ej: Proteína, creatina...',
-                    validation: (val) => val.trim() !== '',
-                    error: 'Por favor, dinos qué suplementos consumes.',
-                    dependsOn: { id: 'supplements', value: 'Sí' } 
-                },
-                {
-                    id: 'sponsorship',
-                    label: '¿Te ha patrocinado otra marca antes?',
-                    icon: '🤝',
-                    type: 'select',
-                    options: ['Sí', 'No'],
-                    validation: (val) => val !== '',
-                    error: 'Por favor, selecciona una opción.'
-                },
-                {
-                    id: 'currentSponsorship',
-                    label: '¿Cuentas con el patrocinio ahora mismo?',
-                    icon: '🤝',
-                    type: 'select',
-                    options: ['Sí', 'No'],
-                    validation: (val) => val !== '',
-                    error: 'Por favor, selecciona una opción.',
-                    dependsOn: { id: 'sponsorship', value: 'Sí' }
-                }
+                { id: 'name', label: 'IDENTIFICACIÓN DEL OPERADOR (NOMBRE)', icon: 'user', type: 'text', placeholder: 'NOMBRE COMPLETO', validation: val => val.trim() !== '', error: 'IDENTIFICACIÓN REQUERIDA' },
+                { id: 'age', label: 'TIEMPO EN SERVICIO (EDAD)', icon: 'calendar', type: 'number', placeholder: 'EJ: 25', validation: val => /^\d+$/.test(val) && parseInt(val) > 0, error: 'DATO INVÁLIDO' },
+                { id: 'city', label: 'BASE DE OPERACIONES (CIUDAD DONDE VIVES)', icon: 'map-pin', type: 'text', placeholder: 'EJ: CDMX', validation: val => val.trim() !== '', error: 'UBICACIÓN REQUERIDA' },
+                { id: 'instagram', label: 'CANAL DE TRANSMISIÓN (INSTAGRAM)', icon: 'instagram', type: 'text', placeholder: '@USUARIO', validation: val => val.trim() !== '', error: 'ENLACE REQUERIDO' },
+                { id: 'training', label: 'EXPERIENCIA DE COMBATE (ENTRENAMIENTO)', icon: 'dumbbell', type: 'select', options: ['Menos de 6 meses', '6 meses', '9 meses', '1 año', '1-3 años', 'Más de 6 años'], validation: val => val !== '', error: 'SELECCIÓN REQUERIDA' },
+                { id: 'supplements', label: '¿CONSUMO DE SUPLEMENTOS?', icon: 'pill', type: 'select', options: ['Sí', 'No'], validation: val => val !== '', error: 'SELECCIÓN REQUERIDA' },
+                { id: 'supplementsWhich', label: 'ESPECIFICAR ARSENAL', icon: 'list', type: 'text', placeholder: 'PROTEÍNA, CREATINA...', validation: val => val.trim() !== '', error: 'DETALLE REQUERIDO', dependsOn: { id: 'supplements', value: 'Sí' } },
+                { id: 'sponsorship', label: '¿TE HAN PATROCINADO ANTES?', icon: 'flag', type: 'select', options: ['Sí', 'No'], validation: val => val !== '', error: 'SELECCIÓN REQUERIDA' },
+                { id: 'currentSponsorship', label: '¿AFILIACIÓN ACTIVA?', icon: 'alert-circle', type: 'select', options: ['Sí', 'No'], validation: val => val !== '', error: 'SELECCIÓN REQUERIDA', dependsOn: { id: 'sponsorship', value: 'Sí' } }
             ];
 
             const mainWhatsAppNumber = '5215629554857';
 
-            // --- 2. Selectores del DOM ---
+            // --- 2. Elementos ---
             const screens = document.querySelectorAll('.screen');
             const startBtn = document.getElementById('start-btn');
             const nextBenefitBtn = document.getElementById('next-benefit-btn');
             const formNextBtn = document.getElementById('form-next-btn');
             const whatsappBtn = document.getElementById('whatsapp-btn');
-            
             const formLabel = document.getElementById('form-step-label');
             const formInputContainer = document.getElementById('form-step-input-container');
             const stepValidation = document.getElementById('step-validation');
 
-            const progressBars = {
-                benefits: document.getElementById('progress-benefits'),
-                form: document.getElementById('progress-form'),
-                finalAccept: document.getElementById('progress-final-accept'),
-                finalReject: document.getElementById('progress-final-reject')
-            };
-            
-
-            // --- 3. Funciones Principales ---
-
+            // --- 3. Lógica de Navegación ---
             function navigateTo(screenId) {
                 screens.forEach(screen => screen.classList.remove('active'));
-                const targetScreen = document.getElementById(screenId);
-                if (targetScreen) targetScreen.classList.add('active');
+                document.getElementById(screenId).classList.add('active');
                 state.currentScreen = screenId;
                 window.scrollTo(0, 0);
             }
 
-            function updateProgress(screenKey, width) {
-                if (progressBars[screenKey]) {
-                    progressBars[screenKey].style.width = width;
-                }
+            function updateProgress(elementId, width) {
+                const el = document.getElementById(elementId);
+                if(el) el.style.width = width;
             }
 
+            // --- 4. Lógica de Beneficios ---
             function showBenefit(index) {
-                const benefitTextEl = document.getElementById('benefit-text');
-                if (benefitTextEl) {
-                    benefitTextEl.style.opacity = '0';
-                    setTimeout(() => {
-                        benefitTextEl.innerHTML = benefitMessages[index];
-                        benefitTextEl.style.opacity = '1';
-                    }, 300);
-                }
+                const textEl = document.getElementById('benefit-text');
+                textEl.style.opacity = '0';
+                setTimeout(() => {
+                    textEl.innerHTML = benefitMessages[index];
+                    textEl.style.opacity = '1';
+                }, 300);
             }
-            
+
+            // --- 5. Lógica de Formulario ---
             function renderCurrentFormStep() {
-                stepValidation.textContent = '';
-                
+                stepValidation.innerHTML = '';
                 let step = formSteps[state.currentFormStep];
 
+                // Lógica de dependencias (saltar pasos)
                 if (step.dependsOn) {
-                    const parentValue = state.formData[step.dependsOn.id];
-                    if (parentValue !== step.dependsOn.value) {
-                        // Rellenar con N/A y saltar
+                    const parentVal = state.formData[step.dependsOn.id];
+                    if (parentVal !== step.dependsOn.value) {
                         state.formData[step.id] = 'N/A';
                         state.currentFormStep++;
-                        if (state.currentFormStep >= formSteps.length) {
-                            evaluateAndTransition();
-                        } else {
-                            renderCurrentFormStep();
-                        }
-                        return;
+                        if (state.currentFormStep >= formSteps.length) return evaluateAndTransition();
+                        return renderCurrentFormStep();
                     }
                 }
 
-                formLabel.innerHTML = `<span class="label-icon">${step.icon}</span> ${step.label}`;
+                // Renderizado
+                formLabel.innerHTML = `${step.label}`;
                 let inputHtml = '';
                 
-                switch(step.type) {
-                    case 'text':
-                    case 'number':
-                        inputHtml = `<input type="${step.type}" id="step-${step.id}" placeholder="${step.placeholder}" value="">`;
-                        break;
-                    case 'select':
-                        let optionsHtml = '<option value="" disabled selected>Por favor, selecciona algo</option>';
-                        optionsHtml += step.options.map(opt => `<option value="${opt}">${opt}</option>`).join('');
-                        inputHtml = `<select id="step-${step.id}">${optionsHtml}</select>`;
-                        break;
-                }
-                formInputContainer.innerHTML = inputHtml;
-
-                const inputElement = document.getElementById(`step-${step.id}`);
-                if (state.formData[step.id] && state.formData[step.id] !== 'N/A') {
-                    inputElement.value = state.formData[step.id];
-                }
+                const commonClasses = "tech-input w-full p-4 text-xl font-display uppercase tracking-wide rounded-none placeholder-gray-600 focus:placeholder-gray-500";
 
                 if (step.type === 'select') {
-                    if (inputElement.value) {
-                        inputElement.classList.add('has-value');
-                    }
-                    inputElement.addEventListener('change', () => {
-                        inputElement.classList.toggle('has-value', !!inputElement.value);
-                    });
-                }
-
-                if (state.currentFormStep === formSteps.length - 1) {
-                    formNextBtn.textContent = 'Finalizar';
+                    let opts = `<option value="" disabled selected>/// SELECCIONAR OPCIÓN ///</option>`;
+                    opts += step.options.map(o => `<option value="${o}" class="bg-black text-white">${o.toUpperCase()}</option>`).join('');
+                    inputHtml = `<select id="step-${step.id}" class="${commonClasses} appearance-none cursor-pointer">${opts}</select>`;
                 } else {
-                    formNextBtn.textContent = 'Siguiente';
+                    inputHtml = `<input type="${step.type}" id="step-${step.id}" class="${commonClasses}" placeholder="${step.placeholder}" autocomplete="off">`;
                 }
+                
+                formInputContainer.innerHTML = inputHtml;
+                
+                // Autocus
+                setTimeout(() => {
+                    const input = document.getElementById(`step-${step.id}`);
+                    if(input) input.focus();
+                }, 100);
+
+                formNextBtn.textContent = (state.currentFormStep === formSteps.length - 1) ? 'FINALIZAR PROTOCOLO' : 'CONFIRMAR DATO';
             }
-            
+
             function validateAndAdvance() {
                 let step = formSteps[state.currentFormStep];
-                const inputElement = document.getElementById(`step-${step.id}`);
-                const value = inputElement.value;
+                const input = document.getElementById(`step-${step.id}`);
+                const val = input.value;
 
-                // Validación de campo requerido
-                if (!step.validation(value)) {
-                    stepValidation.textContent = step.error;
+                if (!step.validation(val)) {
+                    stepValidation.innerHTML = `<i data-lucide="alert-triangle" class="w-4 h-4"></i> ${step.error}`;
+                    lucide.createIcons();
+                    input.classList.add('border-neon-red');
                     return;
                 }
-                
-                // Validación exitosa
-                stepValidation.textContent = '';
-                state.formData[step.id] = value;
-                state.currentFormStep++;
 
-                updateProgress('form', `66%`); // Mantener en 66%
+                state.formData[step.id] = val;
+                state.currentFormStep++;
                 
+                // Progreso visual (aprox)
+                const progress = ((state.currentFormStep / formSteps.length) * 100) + '%';
+                updateProgress('progress-form', progress);
+
                 if (state.currentFormStep >= formSteps.length) {
                     evaluateAndTransition();
                 } else {
                     renderCurrentFormStep();
                 }
             }
-            
-            // N U E V O: Evalúa al final y transiciona a Aceptado o Rechazado
+
+            // --- 6. Evaluación Final ---
             function evaluateAndTransition() {
-                // Por defecto, aceptado
                 let isAccepted = true;
-                
-                // Aplicar reglas de rechazo
-                if (parseInt(state.formData.age, 10) <= 18) {
-                    isAccepted = false;
-                }
-                if (state.formData.training === 'Menos de 6 meses') {
-                    isAccepted = false;
-                }
-                if (state.formData.supplements === 'No') {
-                    isAccepted = false;
-                }
-                // Si dijo 'Sí' a patrocinio y 'Sí' a patrocinio actual
-                if (state.formData.sponsorship === 'Sí' && state.formData.currentSponsorship === 'Sí') {
-                    isAccepted = false;
-                }
-                
-                state.isAccepted = isAccepted;
-
-                if (state.isAccepted) {
-                    // --- ACEPTADO ---
-                    navigateTo('final-screen');
-                    updateProgress('finalAccept', '100%');
-                    document.getElementById('current-date-span').textContent = new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' });
-                } else {
-                    // --- RECHAZADO ---
-                    navigateTo('rejection-screen');
-                    updateProgress('finalReject', '100%');
-                }
-            }
-
-            function sendWhatsAppMessage() {
-                const today = new Date().toLocaleDateString('es-MX');
                 const data = state.formData;
 
-                // N U E V O: Mensaje con Emojis
-                let message = `¡Hola Power Labz! 🏋️‍♂️ Quiero unirme al CREW.\n\n`;
-                message += `--- 📋 DATOS DE REGISTRO ---\n`;
-                message += `🗓️ Fecha: ${today}\n`;
-                message += `👤 Nombre: ${data.name || 'N/A'}\n`;
-                message += `🎂 Edad: ${data.age || 'N/A'}\n`;
-                message += `📍 Ciudad: ${data.city || 'N/A'}\n`;
-                message += `📱 Instagram: ${data.instagram || 'N/A'}\n`;
-                message += `💪 Tiempo Entrenando: ${data.training || 'N/A'}\n`;
-                message += `💊 Usa Suplementos: ${data.supplements || 'N/A'}\n`;
-                
-                if (data.supplements === 'Sí') {
-                    message += `   ➡️ Consume: ${data.supplementsWhich || 'N/A'}\n`;
+                // REGLAS DE RECHAZO (Hardcore Mode)
+                if (parseInt(data.age) < 19) isAccepted = false;
+                if (data.training === 'Menos de 6 meses') isAccepted = false;
+                if (data.supplements === 'No') isAccepted = false;
+                if (data.sponsorship === 'Sí' && data.currentSponsorship === 'Sí') isAccepted = false;
+
+                if (isAccepted) {
+                    navigateTo('final-screen');
+                    document.getElementById('current-date-span').textContent = new Date().toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric' }).toUpperCase();
+                } else {
+                    navigateTo('rejection-screen');
                 }
-                
-                message += `🤝 Patrocinio Previo: ${data.sponsorship || 'N/A'}\n`;
-                
-                if (data.sponsorship === 'Sí') {
-                    message += `   ➡️ Patrocinio Actual: ${data.currentSponsorship || 'N/A'}\n`;
-                }
-                
-                message += `\n¡Espero confirmación! 🚀`;
-                
-                const encodedMessage = encodeURIComponent(message);
-                const waLink = `https://wa.me/${mainWhatsAppNumber}?text=${encodedMessage}`;
-                
-                window.open(waLink, '_blank');
             }
 
-            // --- 4. Event Listeners ---
+            // --- 7. WhatsApp ---
+            whatsappBtn.addEventListener('click', () => {
+                const d = state.formData;
+                let msg = `🛑 *NUEVO RECLUTA: PROTOCOLO POWER LABZ* 🛑\n\n`;
+                msg += `👤 *AGENTE:* ${d.name}\n`;
+                msg += `🎂 *EDAD:* ${d.age}\n`;
+                msg += `📍 *BASE:* ${d.city}\n`;
+                msg += `📱 *RED:* ${d.instagram}\n`;
+                msg += `🏋️ *EXP:* ${d.training}\n`;
+                msg += `💊 *SUPS:* ${d.supplements} (${d.supplementsWhich || 'N/A'})\n`;
+                msg += `🤝 *PATROCINIOS:* ${d.sponsorship} (Activo: ${d.currentSponsorship || 'N/A'})\n\n`;
+                msg += `🚀 *SOLICITANDO ACTIVACIÓN DE SUMINISTROS.*`;
 
+                window.open(`https://wa.me/${mainWhatsAppNumber}?text=${encodeURIComponent(msg)}`, '_blank');
+            });
+
+            // --- Listeners Globales ---
             startBtn.addEventListener('click', () => {
                 navigateTo('benefits-screen');
-                updateProgress('benefits', '33%');
+                updateProgress('progress-benefits', '20%');
                 showBenefit(0);
             });
 
             nextBenefitBtn.addEventListener('click', () => {
                 state.currentBenefit++;
+                const progress = 20 + ((state.currentBenefit / benefitMessages.length) * 80) + '%';
+                updateProgress('progress-benefits', progress);
+
                 if (state.currentBenefit < benefitMessages.length) {
                     showBenefit(state.currentBenefit);
                 } else {
                     navigateTo('form-screen');
-                    updateProgress('form', '66%');
                     renderCurrentFormStep();
                 }
             });
 
             formNextBtn.addEventListener('click', validateAndAdvance);
             
-            whatsappBtn.addEventListener('click', sendWhatsAppMessage);
-
+            // Enter key support
+            formInputContainer.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') validateAndAdvance();
+            });
         });
     </script>
 </body>
